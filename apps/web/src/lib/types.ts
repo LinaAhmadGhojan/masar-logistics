@@ -1,0 +1,274 @@
+export type Role = "admin" | "dispatcher" | "finance" | "client" | "driver";
+
+export type City = { id: number; ar: string; en: string; country: string; lat?: number; lng?: number };
+
+export type User = {
+  id: number;
+  role: Role;
+  login: string;
+  full_name: string;
+  phone: string | null;
+  active: boolean;
+  view_all: boolean;
+  sender_id: number | null;
+  driver_id: number | null;
+  sender_name: string | null;
+  driver_name: string | null;
+  perms: string[];
+  last_login: string | null;
+};
+
+export type Company = {
+  id: number;
+  name: string;
+  name_en: string;
+  currency: string;
+  vat_rate: number;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  vat_no: string | null;
+  waybill_prefix: string;
+  next_seq: number;
+  auto_number: boolean;
+  number_optional: boolean;
+  attachment_required: boolean;
+  require_refs: boolean;
+  pod_required: boolean;
+  geofence_m: number;
+  distance_factor: number;
+  sla_hours: number;
+};
+
+export type Meta = {
+  service_types: string[];
+  deliver_types: string[];
+  payment_modes: string[];
+  invoice_types: string[];
+  insurance_types: string[];
+  collect_types: string[];
+  return_refs: string[];
+  pkg_types: string[];
+  materials: string[];
+  vehicle_kinds: string[];
+  priorities: string[];
+  statuses: string[];
+  stages: string[];
+  cities: City[];
+  company: Company;
+};
+
+export type Sender = {
+  id: number;
+  name: string;
+  contact_person: string | null;
+  mobile: string | null;
+  email: string | null;
+  city_id: number | null;
+  city: City | null;
+  address: string | null;
+  gps: string | null;
+  national_address: string | null;
+  vat_no: string | null;
+  credit_limit: number;
+  payment_terms_days: number;
+  status: boolean;
+  locked: boolean;
+  waybills?: number;
+  consignees?: Consignee[];
+};
+
+export type Consignee = {
+  id: number;
+  sender_id: number;
+  sender_name?: string | null;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  mobile: string | null;
+  city_id: number | null;
+  city: City | null;
+  address: string | null;
+  gps: string | null;
+  nad: string | null;
+  idno: string | null;
+  status: boolean;
+};
+
+export type Vehicle = {
+  id: number;
+  plate: string;
+  kind: string;
+  capacity_kg: number;
+  capacity_pallets: number;
+  status: "available" | "on_trip" | "maintenance";
+  insurance_expiry: string | null;
+  registration_expiry: string | null;
+  last_service: string | null;
+  odometer_km: number;
+  notes: string | null;
+  insurance_days: number | null;
+  registration_days: number | null;
+  driver_name?: string | null;
+};
+
+export type Driver = {
+  id: number;
+  name: string;
+  mobile: string | null;
+  email: string | null;
+  doc_id: string | null;
+  license_no: string | null;
+  license_expiry: string | null;
+  license_days: number | null;
+  vehicle_id: number | null;
+  vehicle_no: string | null;
+  sender_ids: number[];
+  status: boolean;
+  locked: boolean;
+  rating: number;
+  online: boolean;
+  last_lat: number | null;
+  last_lng: number | null;
+  last_speed: number | null;
+  last_seen: string | null;
+  active?: number;
+  delivered?: number;
+  distance_km?: number;
+};
+
+export type Tariff = {
+  id: number;
+  name: string;
+  code: string;
+  service_type: string | null;
+  from_city_id: number | null;
+  to_city_id: number | null;
+  from_city: City | null;
+  to_city: City | null;
+  base: number;
+  per_km: number;
+  per_pallet: number;
+  per_kg: number;
+  min_charge: number;
+  active: boolean;
+};
+
+export type Pkg = { type: string; qty: number; weight: number; height: number; width: number; length: number };
+
+export type WaybillEvent = { id: number; at: string; type: string; text: string | null; actor: string | null; lat: number | null; lng: number | null };
+export type Attachment = { id: number; kind: "from" | "policy"; filename: string; size: number; url: string; created_at: string };
+
+export type Waybill = {
+  id: number;
+  number: string;
+  date: string;
+  status: "new" | "post" | "delivered" | "verified" | "invoiced" | "cancelled";
+  stage: string;
+  delivery_status: number;
+  priority: "normal" | "urgent";
+  sender_id: number;
+  sender_name: string | null;
+  consignee_id: number | null;
+  to_name: string | null;
+  to_mobile: string | null;
+  to_phone: string | null;
+  from_city: City | null;
+  to_city: City | null;
+  from_address: string | null;
+  to_address: string | null;
+  from_gps: string | null;
+  to_gps: string | null;
+  driver_id: number | null;
+  driver_name: string | null;
+  driver_mobile: string | null;
+  vehicle_no: string | null;
+  packages: Pkg[];
+  material: string | null;
+  qty: number;
+  weight: number;
+  total_qty: number;
+  est_weight: number;
+  volume_m3: number;
+  service_type: string;
+  deliver_type: string;
+  payment_mode: string | null;
+  invoice_type: string | null;
+  service_charge: number;
+  vat_amount: number;
+  total: number;
+  cod_amount: number;
+  cod_collected: boolean;
+  cod_settled: boolean;
+  distance_km: number;
+  duration_min: number;
+  order_no: string | null;
+  shipment_no: string | null;
+  delivery_note: string | null;
+  promised_at: string | null;
+  delivered_at: string | null;
+  created_at: string;
+  delayed: boolean;
+  late: boolean;
+  tariff_id: number | null;
+  invoice: { id: number; number: string; status: string } | null;
+  collect_status: boolean;
+  received_by: string | null;
+  receiver_id: string | null;
+  receiver_mobile: string | null;
+  // detail only
+  from_mobile?: string | null;
+  from_email?: string | null;
+  reference_no?: string | null;
+  to_email?: string | null;
+  to_nad?: string | null;
+  to_idno?: string | null;
+  shipment_det?: string | null;
+  remark?: string | null;
+  return_refs?: string[];
+  insurance_type?: string | null;
+  shipment_value?: number;
+  collect_type?: string | null;
+  collected_at?: string | null;
+  vehicle_id?: number | null;
+  failure_reason?: string | null;
+  attempts?: number;
+  pod_note?: string | null;
+  has_signature?: boolean;
+  has_photo?: boolean;
+  pod_signature?: string | null;
+  pod_photo?: string | null;
+  events?: WaybillEvent[];
+  attachments?: Attachment[];
+  otp?: string | null;
+  driver_position?: { lat: number; lng: number; speed: number | null; seen: string | null; remaining_km?: number; eta_min?: number } | null;
+  suggested_tariff_id?: number | null;
+  suggested_charge?: number;
+  suggested_vat?: number;
+};
+
+export type WaybillList = { items: Waybill[]; total: number; page: number; size: number; counts: Record<string, number> };
+
+export type Invoice = {
+  id: number;
+  number: string;
+  sender_id: number;
+  sender_name: string | null;
+  issue_date: string;
+  due_date: string | null;
+  status: "draft" | "issued" | "partial" | "paid" | "void";
+  subtotal: number;
+  vat: number;
+  total: number;
+  paid: number;
+  balance: number;
+  overdue: boolean;
+  lines_count: number;
+  note?: string | null;
+  sender?: Sender | null;
+  lines?: { id: number; waybill_id: number | null; description: string; qty: number; unit_price: number; amount: number; vat: number }[];
+  payments?: { id: number; date: string; amount: number; method: string; ref: string | null }[];
+  company?: { name: string; name_en: string; vat_no: string | null; address: string | null; phone: string | null; email: string | null; currency: string; vat_rate: number };
+};
+
+export type Notice = { id: number; kind: string; title: string; body: string | null; link: string | null; seen: boolean; at: string };

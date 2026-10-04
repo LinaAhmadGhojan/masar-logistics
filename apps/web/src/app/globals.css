@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #f5faf7;
+  --card: #ffffff;
+  --card-2: #f1f8f4;
+  --line: #e2eee8;
+  --text: #17302a;
+  --muted: #5f7a6e;
+  --ink: #0b2c23;
+  --ink-2: #134536;
+  --ink-text: #bddccd;
+  --brand: #2aa57c;
+  --brand-2: #208a67;
+  --brand-soft: #e5f5ee;
+  --ok: #138a4a;
+  --ok-soft: #e6f6ed;
+  --warn: #b86a00;
+  --warn-soft: #fff3da;
+  --bad: #d12c2c;
+  --bad-soft: #fdeaea;
+  --info: #1d6fb8;
+  --info-soft: #e3f0fa;
+  --violet: #6d3fd0;
+  --violet-soft: #f0e9fd;
+  --shadow: 0 1px 2px rgba(20, 60, 45, 0.05), 0 4px 14px rgba(20, 60, 45, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg: #09150f;
+  --card: #10211a;
+  --card-2: #0c1b15;
+  --line: #1d3a2e;
+  --text: #e4f1ea;
+  --muted: #8db0a0;
+  --ink: #06130e;
+  --ink-2: #0d2a20;
+  --ink-text: #9cc2b0;
+  --brand-soft: #0f3a2a;
+  --ok: #4ad08a;
+  --ok-soft: #0f2c1e;
+  --warn: #f1b04a;
+  --warn-soft: #34260c;
+  --bad: #ff7b7b;
+  --bad-soft: #351616;
+  --info: #7cc0ff;
+  --info-soft: #12304a;
+  --violet: #b190ff;
+  --violet-soft: #25194a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card2: var(--card-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink-2);
+  --color-inktext: var(--ink-text);
+  --color-brand: var(--brand);
+  --color-brand2: var(--brand-2);
+  --color-brandsoft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-oksoft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warnsoft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-badsoft: var(--bad-soft);
+  --color-info: var(--info);
+  --color-infosoft: var(--info-soft);
+  --color-violet: var(--violet);
+  --color-violetsoft: var(--violet-soft);
+  --font-sans: var(--font-tajawal), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --shadow-card: var(--shadow);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 9%, var(--bg)) 0, var(--bg) 340px) no-repeat, var(--bg);
+  color: var(--text);
+  font-family: var(--font-tajawal), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+@layer base {
+  a { color: inherit; }
+  button { cursor: pointer; font-family: inherit; }
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: var(--text);
+}
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* map */
+.leaflet-container {
+  font-family: inherit;
+  background: var(--card-2);
+  z-index: 0;
+}
+.mk {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.mk-truck {
+  animation: pulse 2.2s ease-out infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(42, 165, 124, 0.5); }
+  100% { box-shadow: 0 0 0 16px rgba(42, 165, 124, 0); }
+}
+@keyframes slideup {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.anim-up {
+  animation: slideup 0.22s ease-out both;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* printing: waybill / invoice sheets */
+@media print {
+  @page { size: A4; margin: 10mm; }
+  html, body { background: #fff !important; color: #000 !important; }
+  .no-print { display: none !important; }
+  .print-sheet { box-shadow: none !important; border: 0 !important; margin: 0 !important; max-width: none !important; }
+  [data-theme="dark"] { --card: #fff; --text: #000; --muted: #444; --line: #bbb; --card-2: #f4f4f4; }
+}

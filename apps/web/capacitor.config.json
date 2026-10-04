@@ -1,0 +1,6 @@
+{
+  "appId": "com.masar.logistics",
+  "appName": "Masar",
+  "webDir": "out",
+  "android": { "allowMixedContent": false }
+}

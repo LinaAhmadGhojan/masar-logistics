@@ -1,0 +1,27 @@
+node_modules/
+.next/
+out/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.db
+uploads/
+.env
+.env.local
+*.tsbuildinfo
+# Android build output (the APK is published in releases/)
+apps/web/android/.gradle/
+apps/web/android/build/
+apps/web/android/app/build/
+apps/web/android/capacitor-cordova-android-plugins/build/
+apps/web/android/local.properties
+apps/web/android/.idea/
+apps/web/android/app/src/main/assets/public/
+apps/web/android/app/src/main/assets/capacitor.config.json
+apps/web/android/app/src/main/assets/capacitor.plugins.json
+apps/web/android/app/src/main/res/xml/config.xml
+.DS_Store
+Thumbs.db
+apps/web/AGENTS.md
+apps/web/CLAUDE.md

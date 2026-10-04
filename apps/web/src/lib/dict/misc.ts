@@ -1,0 +1,15 @@
+export const MISC: [string, string, string][] = [
+  ["login.title", "ادخل إلى مسار", "Sign in to Masar"],
+  ["login.pick", "اختر الدور الذي تريد تجربته، وسيتم الدخول مباشرة", "Pick a role to try — you are signed in straight away"],
+  ["login.other", "حساب آخر", "Another account"],
+  ["login.login", "اسم الدخول", "Login"],
+  ["login.submit", "دخول", "Sign in"],
+  ["login.track", "هل تنتظر شحنة؟ تتبّعها بدون حساب", "Waiting for a shipment? Track it without an account"],
+  ["login.desc.admin", "كل شيء: المستخدمون، القواعد، التدقيق", "Everything: users, rules, audit"],
+  ["login.desc.dispatcher", "البوالص، لوحة التوزيع، التتبع المباشر", "Waybills, dispatch board, live tracking"],
+  ["login.desc.finance", "التسعير، الفواتير، المدفوعات، COD", "Pricing, invoices, payments, COD"],
+  ["login.desc.client", "بوابة العميل: شحناتي وفواتيري", "Client portal: my shipments & invoices"],
+  ["login.desc.driver", "تطبيق السائق: مهامي والتتبع", "Driver app: my jobs & tracking"],
+  ["login.hero", "من البوليصة إلى الفاتورة — في مكان واحد", "From waybill to invoice — in one place"],
+  ["login.hero2", "بوالص، توزيع، تتبع مباشر، إثبات تسليم، وفوترة.", "Waybills, dispatch, live tracking, proof of delivery and billing."],
+];
